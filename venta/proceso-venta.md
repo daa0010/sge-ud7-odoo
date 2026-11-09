@@ -98,6 +98,26 @@ privilegio:
 
 ---
 
+## Estado Final del Pedido y Análisis de Ventas
+
+### Comprobación del ciclo completo en el pedido de venta
+Al completarse la entrega física y el abono fiscal, el pedido `S00025` queda consolidado con el estado de facturación **Totalmente facturado**.
+
+En la vista del documento se verifica la sincronización de los enlaces bidireccionales inteligentes (*smart buttons*), evidenciando la vinculación directa con el albarán `My Co/OUT/00001` y la factura `INV/2026/00001`, así como la correspondencia total entre las cantidades pedidas, entregadas y facturadas (1,00 / 1,00 / 1,00).
+
+![Estado final del pedido facturado](../capturas/pedidoFacturado.png)
+
+---
+
+### Análisis e Informes de Ventas
+Desde el módulo **Ventas → Informes → Ventas**, el sistema computa de forma automatizada la operación mercantil en el panel analítico global:
+
+* **Volumen facturado:** 96,31 € computados en el periodo contable actual.
+* **Atribución comercial:** La venta queda imputada a Laura Gómez en recepción, desglosando los importes de los 3 productos adquiridos por Carlos Mendoza Ruiz.
+
+![Análisis de ventas](../capturas/analisisVentas.png)
+---
+
 ## 3. Trazabilidad Documental y Auditoría
 
 La arquitectura relacional de Odoo vincula la totalidad de los asientos e identificadores técnicos generados a lo largo
