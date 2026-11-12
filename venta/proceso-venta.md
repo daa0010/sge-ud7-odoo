@@ -14,8 +14,8 @@ privilegio:
 | Rol                              | Usuario             | Cuenta / Identificador       | Operación asignada                                                        |
 |:---------------------------------|:--------------------|:-----------------------------|:--------------------------------------------------------------------------|
 | **Comercial / Recepción**        | Laura Gómez         | `laura.comercial@fitzone.es` | Creación del presupuesto inicial y aplicación de condiciones comerciales. |
-| **Responsable de Ventas**        | David               | `david@fitzone.es` (Admin)   | Supervisión y confirmación del pedido de venta (`sale.order`).            |
-| **Almacén / Logística**          | Sistema / David     | Operaciones internas         | Validación del albarán de entrega y salida física de existencias.         |
+| **Responsable de Ventas**        | David               | `david@fitzone.es`           | Supervisión y confirmación del pedido de venta (`sale.order`).            |
+| **Almacén / Logística**          | David               | `david@fitzone.es`           | Validación del albarán de entrega y salida física de existencias.         |
 | **Administración / Facturación** | Elena Martín        | `administracion@fitzone.es`  | Generación del borrador, publicación de factura y conciliación del cobro. |
 | **Cliente (Socio)**              | Carlos Mendoza Ruiz | `carlos.mendoza@email.com`   | Receptor del servicio/productos y pagador.                                |
 
@@ -25,7 +25,7 @@ privilegio:
 
 ```text
  [Presupuesto S00025] ──► [Pedido Confirmado] ──► [Albarán My Co/OUT/00001] ──► [Factura INV/2026/00001] ──► [Cobro Registrado]
-   (Laura Gómez)              (David)                  (Inventario)                 (Elena Martín)               (Elena Martín)
+   (Laura Gómez)              (David)                  (David)                 (Elena Martín)               (Elena Martín)
 ```
 
 ### Paso 1: Creación del Presupuesto (Laura Gómez)
@@ -62,7 +62,7 @@ privilegio:
 
 ---
 
-### Paso 3: Expedición y Control de Stock (Inventario)
+### Paso 3: Expedición y Control de Stock (David)
 
 * **Documento de entrega (Albarán):** `My Co/OUT/00001`
 * **Tipo de operación:** Órdenes de entrega
@@ -70,8 +70,9 @@ privilegio:
     * `[PROT-01] Bote Proteína Whey 1kg`: Demanda = 1,00 | Realizado = 1,00
     * `[TOALLA-01] Toalla Microfibra FitZone`: Demanda = 1,00 | Realizado = 1,00 *(La cuota mensual queda excluida de la
       orden logística por ser un producto de naturaleza intangible/servicio).*
+* **Acción ejecutada:** Haciendo uso de sus permisos de Administrador de Inventario, **David** accede a la orden de
+  entrega asociada al pedido, aplica las cantidades demandadas y valida la salida.
 * **Validación:**
-    * Se confirma la entrega de material marcando las cantidades como hechas y validando el movimiento.
     * Estado final del albarán: **Hecho**.
     * **Impacto en inventario:** Comprobación en la ficha de producto de que el stock a mano se reduce en una unidad por
       artículo entregado.
@@ -101,19 +102,26 @@ privilegio:
 ## 3. Estado Final del Pedido y Análisis de Ventas
 
 ### Comprobación del ciclo completo en el pedido de venta
-Al completarse la entrega física y el abono fiscal, el pedido `S00025` queda consolidado con el estado de facturación **Totalmente facturado**.
 
-En la vista del documento se verifica la sincronización de los enlaces bidireccionales inteligentes (*smart buttons*), evidenciando la vinculación directa con el albarán `My Co/OUT/00001` y la factura `INV/2026/00001`, así como la correspondencia total entre las cantidades pedidas, entregadas y facturadas (1,00 / 1,00 / 1,00).
+Al completarse la entrega física y el abono fiscal, el pedido `S00025` queda consolidado con el estado de facturación
+**Totalmente facturado**.
+
+En la vista del documento se verifica la sincronización de los enlaces bidireccionales inteligentes (*smart buttons*),
+evidenciando la vinculación directa con el albarán `My Co/OUT/00001` y la factura `INV/2026/00001`, así como la
+correspondencia total entre las cantidades pedidas, entregadas y facturadas (1,00 / 1,00 / 1,00).
 
 ![Estado final del pedido facturado](../capturas/pedidoFacturado.png)
 
 ---
 
 ### Análisis e Informes de Ventas
-Desde el módulo **Ventas → Informes → Ventas**, el sistema computa de forma automatizada la operación mercantil en el panel analítico global:
+
+Desde el módulo **Ventas → Informes → Ventas**, el sistema computa de forma automatizada la operación mercantil en el
+panel analítico global:
 
 * **Volumen facturado:** 96,31 € computados en el periodo contable actual.
-* **Atribución comercial:** La venta queda imputada a Laura Gómez en recepción, desglosando los importes de los 3 productos adquiridos por Carlos Mendoza Ruiz.
+* **Atribución comercial:** La venta queda imputada a Laura Gómez en recepción, desglosando los importes de los 3
+  productos adquiridos por Carlos Mendoza Ruiz.
 
 ![Análisis de ventas](../capturas/analisisVentas.png)
 
