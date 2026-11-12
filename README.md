@@ -31,4 +31,3 @@ el catálogo de productos, las restricciones de acceso por perfil y la ejecució
 
 **[Ver Vídeo de Demostración: video-odoo.mp4](./video/video-odoo.mp4)**
 
-*(Nota: Haz clic en el enlace para abrir o descargar el archivo de vídeo desde el repositorio).*
